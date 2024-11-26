@@ -2,7 +2,6 @@
 #define LIDARDRIVER_H
 
 #include <vector>
-#include <deque>
 #include <exception>
 #include <cmath>
 
@@ -20,15 +19,15 @@ class LidarDriver {
         int counter;      // Contatore per tenere traccia dello scan più nuovo -> E' l'indice per la colonna più vecchia
         int size;         // Contatore per vedere se il buffer è pieno
         int nLetture;     // Numero di letture
-        deque<vector<double>> tabella;
+        vector<vector<double>> tabella;
 
     public:
         LidarDriver(int buffer_size, double ang_ris);
 
         const int get_BUFFER_DIM() const;              // Metodo per ottenere BUFFER_DIM
         const double get_ris_ang() const;              // Metodo per ottenere ris_ang
-        const int get_counter() const;           // Metodo per ottenere counter
-        const deque<vector<double>>& get_tabella() const;  // Metodo per ottenere 
+        const int get_counter() const;                 // Metodo per ottenere counter
+        const vector<vector<double>>& get_tabella() const;  // Metodo per ottenere 
         // ---+---
         // Organizzando le scan in matrice usiamo coordinate x e y per navigare. La coordinata x indica una colonna.
         // Una colonna comprende tutte le letture. Una colonna è quindi una scan. Fornendo il parametro y possiamo quindi

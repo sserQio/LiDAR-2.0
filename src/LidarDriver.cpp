@@ -9,7 +9,7 @@ LidarDriver::LidarDriver(int buffer_size, double ang_ris){
     ris_ang = ang_ris;
     size = 0;
     counter = 0;
-    nLetture = static_cast<int>(angolo / ris_ang);
+    nLetture = static_cast<int>(angolo / ris_ang) + 1;
     for (double x = 0; x < BUFFER_DIM; x++){
         tabella.push_back(vector<double> ());
     }
@@ -27,7 +27,7 @@ const int LidarDriver::get_counter() const{
     return counter;
 }
 
-const deque<vector<double>>& LidarDriver::get_tabella() const{
+const vector<vector<double>>& LidarDriver::get_tabella() const{
     return tabella;
 }
 
@@ -76,14 +76,23 @@ void LidarDriver::clear_buffer(){
 }
 
 double LidarDriver::get_distance(double target){
-    double ang = get_ris_ang();
+    if(target>180) throw out_of_range("Angolo superiore a 180");
+
     if (target == 0) return tabella[counter - 1][target];   // Angolo richiesto è 0, ritorna la lettura
                                                             // dello scan più recente in posizione 0
     if (fmod(target, get_ris_ang()) == 0) {                 // Angolo trovato esattamente
         return tabella[counter - 1][target];
     }
-    // gestire eccezione caso in cui venga fornito angolo > 180
-    // gestire eccezione caso in cui angolo sia 0
+
+    double parteIntera = static_cast<int>(target);     // Converte il numero in intero
+    double parteDecimale = target - parteIntera;
+    if(parteDecimale >= 0.5){
+        int roundingUp = target + (1 - parteDecimale); // Otteniamo il numero esatto arrotondato per eccesso
+        return tabella[counter - 1][roundingUp];
+    } else {
+        int roundingDown = target - parteDecimale;     // Otteniamo il numero esatto arrotondato per difetto
+        return tabella[counter - 1][roundingDown];
+    }
 }
 
 void LidarDriver::increment_counter(){
@@ -100,7 +109,7 @@ void LidarDriver::decrement_counter() {
 }
 
 ostream& operator<<(ostream& os, const LidarDriver& d){ 
-    const deque<vector<double>>& appoggio = d.get_tabella();
+    const vector<vector<double>>& appoggio = d.get_tabella();
     int b = d.get_BUFFER_DIM();
     int c = d.get_counter();
     if (c != 0) {
