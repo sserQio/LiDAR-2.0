@@ -1,0 +1,4 @@
+/Users/sergio/Documents/Coding/LiDAR 2/CMakeFiles/LidarDriver.dir
+/Users/sergio/Documents/Coding/LiDAR 2/CMakeFiles/LidarDriverTester.dir
+/Users/sergio/Documents/Coding/LiDAR 2/CMakeFiles/edit_cache.dir
+/Users/sergio/Documents/Coding/LiDAR 2/CMakeFiles/rebuild_cache.dir

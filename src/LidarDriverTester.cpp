@@ -2,7 +2,7 @@
 #include "../include/LidarDriver.h"
 
 int main(){
-    LidarDriver c(3, 0.5); // CAMBIARE IN 0.5
+    LidarDriver c(3, 0.5);
 
     try {
         cout << "Creo un oggetto LidarDriver, impostato per contenere 3 scan da 10 valori. L'oggetto è vuoto" << endl;
@@ -71,7 +71,7 @@ int main(){
         cout << "Angolo 1: "<< c.get_distance(1) << endl;
         cout << "Angolo 12.5: "<< c.get_distance(12.5) << endl;
         cout << "Angolo 40: "<< c.get_distance(40) << endl;
-        cout << "Angolo 181: "<< c.get_distance(181) << endl;
+        cout << "Angolo 181: "<< c.get_distance(181) << endl; // Angolo 181 è oltre il limite massimo, Out of Range
 
     } catch (const out_of_range& e) {
         cout << "Eccezione: Index Out of Range" << endl;

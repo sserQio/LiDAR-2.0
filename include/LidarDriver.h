@@ -17,7 +17,7 @@ class LidarDriver {
         int angolo;       // Angolo totale da spaziare, questo valore è fisso a 180 gradi
         double ris_ang;   // Angolo che separa le letture consecutive
         int counter;      // Contatore per tenere traccia dello scan più nuovo -> E' l'indice per la colonna più vecchia
-        int size;         // Contatore per vedere se il buffer è pieno
+        int size;         // Contatore per vedere se il buffer è pieno 
         int nLetture;     // Numero di letture
         vector<vector<double>> tabella;
 
@@ -28,7 +28,7 @@ class LidarDriver {
         const double get_ris_ang() const;              // Metodo per ottenere ris_ang
         const int get_counter() const;                 // Metodo per ottenere counter
         const vector<vector<double>>& get_tabella() const;  // Metodo per ottenere 
-        // ---+---
+
         // Organizzando le scan in matrice usiamo coordinate x e y per navigare. La coordinata x indica una colonna.
         // Una colonna comprende tutte le letture. Una colonna è quindi una scan. Fornendo il parametro y possiamo quindi
         // scegliere quale lettura stampare 
